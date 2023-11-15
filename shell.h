@@ -16,10 +16,8 @@ extern char **environ;
 /* Function prototypes */
 void prompt(void);
 int execute(char *command);
-int execute(char *command);
-char *argv[] = {command, NULL};
 int execute_command(char *command);
-execve(command, argv, environ);
+
 
 
 

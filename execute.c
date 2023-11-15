@@ -5,12 +5,14 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+char *command = NULL; /* Initialize command to NULL */
 /**
 * execute_command - Execute a command entered by the user.
 * @command: The command to execute.
 * Return: 0 on success, 1 on failure.
 */
 int execute_command(char *command)
+
 {
 char *argv[] = {command, NULL}; /* Argument vector for the command */
 

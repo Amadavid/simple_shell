@@ -7,7 +7,7 @@
 
 int main(void)
 {
-	prompt();
-	return (0);
+prompt();
+return (0);
 }
 

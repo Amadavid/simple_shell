@@ -15,6 +15,7 @@ int _userprompt(char **commandBuffer, size_t *bytesRead)
 int bytesReadResult = 0;
 int executionMode = NON_INTERACTIVE_MODE;
 
+int _checkmode(void);
 executionMode = _checkmode();
 if (executionMode == INTERACTIVE_MODE)
 {
@@ -29,4 +30,4 @@ write(STDOUT_FILENO, "\n", 1);
 }
 return (EOF);
 }
-return (EXIT);
+return (EXIT_SUCCESS);
