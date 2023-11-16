@@ -5,17 +5,15 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-char *command = NULL; /* Initialize command to NULL */
 /**
 * execute_command - Execute a command entered by the user.
 * @command: The command to execute.
+*  @argv: array of arguments that follow the command
 * Return: 0 on success, 1 on failure.
 */
-int execute_command(char *command)
+int execute_command(char *command, char *argv[])
 
 {
-char *argv[] = {command, NULL}; /* Argument vector for the command */
-
 if (execve(command, argv, environ) == -1)
 {
 perror("execve");
@@ -30,7 +28,7 @@ return (0); /* Return 0 on success */
 * @command: The command to execute.
 * Return: 0 on success, 1 on failure.
 */
-int execute(char *command)
+int execute(char *command, char *argv[])
 {
 if (command == NULL || command[0] == '\0')
 return (1); /* Error */
@@ -38,7 +36,7 @@ return (1); /* Error */
 if (fork() == 0)
 {
 /* This code is executed by the child process */
-return (execute_command(command));
+return (execute_command(command, argv));
 }
 else
 {
