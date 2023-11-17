@@ -7,7 +7,7 @@
 * @numStrings: The number of strings to concatenate.
 * @...: The variable number of string arguments to concatenate.
 *
-* Return: A pointer 2 a new dynamically allocated string containing d concatenated strings,
+* Return: pointer 2 a new allocated string containing d concatenated strings,
 * separated by a colon.
 */
 char *pathBuild(int numStrings, ...)

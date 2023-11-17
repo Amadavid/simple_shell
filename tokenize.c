@@ -3,7 +3,8 @@
 /**
 * tokenizeString - Tokenize a string into an array of tokens
 *
-* @inputStr: The input string to be tokenized, including command line arguments if any
+* @inputStr: The input string to be tokenized,
+* incuding command line arguments if any
 * @delimiter: The delimiter character(s) used for tokenization
 *
 * Return: An array of tokens
@@ -16,8 +17,8 @@ int tokensFound = 0;        /* Counter for tokens found */
 char *token = NULL;         /* Temporary storage for a token */
 int inputLength = 0;        /* Length of the input string */
 
-inputLength = getStringLength(inputStr);  /* Calculate the length of the input string */
-token = allocateMemory(inputLength);      /* Allocate memory for the temporary token */
+inputLength = getStringLength(inputStr);  /* Cal d length of d input string */
+token = allocateMemory(inputLength);      /* Allocate memory for temp token */
 
 /* Copy the input string to the temporary token */
 copyString(token, inputStr);

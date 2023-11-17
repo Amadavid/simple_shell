@@ -25,7 +25,7 @@ int string_length(char *str_to_measure);
 int _checkmode(void);
 int checkEnvironmentCommand(char *command);
 int putcharr(char character, int fd);
-int displayEnvironment();
+int displayEnvironment(void);
 
 
 

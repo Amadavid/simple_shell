@@ -26,6 +26,7 @@ return (0); /* Return 0 on success */
 /**
 * execute - Execute a command entered by the user.
 * @command: The command to execute.
+* @argv: array of arguments that follow the command
 * Return: 0 on success, 1 on failure.
 */
 int execute(char *command, char *argv[])

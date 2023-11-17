@@ -3,7 +3,7 @@
 /**
 * _userprompt - Displays a user prompt and captures a command to execute.
 *
-* @commandBuffer: Pointer to the memory location where the entered command is stored.
+* @commandBuffer: Pointer to memory locatin wher enter command is stored.
 * @bytesRead: Pointer to a variable tracking the number of bytes read.
 *
 * Return: EXIT if a command is stored in @commandBuffer, EOF if

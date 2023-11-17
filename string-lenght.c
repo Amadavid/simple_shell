@@ -10,13 +10,13 @@
 **/
 int string_length(char *str_to_measure)
 {
-int char_count = 0; // Initialize a counter for characters in the string.
+int char_count = 0; /* Initialize a counter for characters in the string.*/
 
-// Iterate through the string until the null terminator is encountered.
+/* Iterate through the string until the null terminator is encountered.*/
 while (str_to_measure[char_count] != '\0')
 {
-char_count++; // Increment the character count.
+char_count++; /* Increment the character count.*/
 }
 
-return (char_count + 1); // Return the total character count, including the null terminator.
+return (char_count + 1); /* Return d total char count with null terminator.*/
 }
