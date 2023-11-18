@@ -16,7 +16,7 @@ char *getfullpath(char *cmd)
 		if (cmd[i] == '/')
 		{
 			if (stat(cmd, &st) == 0)
-				return (_strdup(cmd));
+				return (strdup(cmd));
 			return (NULL);
 		}
 	}

@@ -69,7 +69,7 @@ char *_atoi(int n)
 	buffer[i] = '\0';
 	reverse_string(buffer, i);
 
-	return (_strdup(buffer));
+	return (strdup(buffer));
 }
 
 /**

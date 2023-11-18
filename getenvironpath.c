@@ -12,12 +12,12 @@ char *getenvironpath(char *var)
 
 	for (i = 0; environ[i]; i++)
 	{
-		tmp = _strdup(environ[i]);
+		tmp = strdup(environ[i]);
 		key = strtok(tmp, "=");
 		if (_strcmp(key, var) == 0)
 		{
 			value = strtok(NULL, "\n");
-			env = _strdup(value);
+			env = strdup(value);
 			free(tmp);
 			return (env);
 		}
