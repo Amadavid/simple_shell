@@ -1,28 +1,27 @@
-#include "sheell.h"
+#include "sshell.h"
 
 /**
-* getEnvironpathvar - get the PATH from the environ variables
-*
-* Return: know value of the PATH variable from the environ variables
-*/
-char *getEnvironpathvar()
+ * getenvironpath - Retrieves the environment variables
+ * @var: Variable to be acquired
+ * Return: Returns the value of the variable or NULL
+ */
+char *getenvironpath(char *var)
 {
-char *path = NULL;
-char *pathValue = NULL;
-envnode *current = NULL;
+	char *tmp, *key, *value, *env;
+	int i;
 
-current = envListhead;
-
-do
-
-{
-path = current->name;
-if (isvarpathenviron(path) == IS_PATH_VARIABLE)
-{
-pathValue = current->envValue;
-break;
-}
-current = current->next;
-} while (current != NULL);
-return (pathValue);
+	for (i = 0; environ[i]; i++)
+	{
+		tmp = _strdup(environ[i]);
+		key = strtok(tmp, "=");
+		if (_strcmp(key, var) == 0)
+		{
+			value = strtok(NULL, "\n");
+			env = _strdup(value);
+			free(tmp);
+			return (env);
+		}
+		free(tmp), tmp = NULL;
+	}
+	return (NULL);
 }

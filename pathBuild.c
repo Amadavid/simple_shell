@@ -1,53 +1,97 @@
-#include "sheell.h"
-
+#include "sshell.h"
 
 /**
-* pathBuild - Concatenate multiple strings into a new string, sep by a colon.
-*
-* @numStrings: The number of strings to concatenate.
-* @...: The variable number of string arguments to concatenate.
-*
-* Return: pointer 2 a new allocated string containing d concatenated strings,
-* separated by a colon.
-*/
-char *pathBuild(int numStrings, ...)
+ * pathbuilt - Constructs a list of built-in commands
+ * @cmd: The command to be built-in
+ *
+ * Return: 0 if successful, 1 otherwise
+ */
+int pathbuilt(char *cmd)
 {
-va_list args;
-char *result = NULL;
-int totalLength = 0;
+	char *b_i[] = {
+		"exit", "env", "setenv",
+		"cd", NULL
+	};
+	int i;
 
-/* Calculate the total length of the concatenated string */
-va_start(args, numStrings);
-for (int i = 0; i < numStrings; i++)
-{
-char *str = va_arg(args, char *);
-totalLength += strlen(str);
-}
-va_end(args);
-
-/* Allocate memory for the concatenated string */
-result = (char *)malloc(totalLength + numStrings + 1);
-
-if (result)
-{
-/* Concatenate the strings, separated by a colon */
-va_start(args, numStrings);
-
-result[0] = '\0'; /* Initialize the result string */
-
-for (int i = 0; i < numStrings; i++)
-{
-char *str = va_arg(args, char *);
-strcat(result, str);
-
-if (i < numStrings - 1)
-{
-strcat(result, ":");
-}
-}
+	for (i = 0; b_i[i]; i++)
+	{
+		if (_strcmp(cmd, b_i[i]) == 0)
+			return (1);
+	}
+	return (0);
 }
 
-va_end(args);
+/**
+ * check_b - Handles execution of built-in commands
+ * @cmd: Command to be executed
+ * @argv: Array of arguments
+ * @status: Status code of the command
+ * @index: Void parameter
+ */
+void check_b(char **cmd, char **argv, int *status, int index)
+{
+	(void)argv;
+	(void)index;
 
-return (result);
+	if (_strcmp(cmd[0], "exit") == 0)
+		_quit_shell(cmd, argv, status, index);
+	else if (_strcmp(cmd[0], "env") == 0)
+		_display_env(cmd, status);
 }
+
+/**
+ * terminateshell - Terminates the interactive shell
+ * @cmd: Command to exit the shell
+ * @argv: Array of arguments
+ * @index: Void parameter
+ * @status: Exit status code
+ */
+void terminateshell(char **cmd, char **argv, int *status, int index)
+{
+	int exit_val = (*status);
+	char *qindex, msg[] = ": exit: Forbidden number: ";
+
+	if (cmd[1])
+	{
+		if (num_is_pos(cmd[1]))
+		{
+			exit_val = custom_atoi(cmd[1]);
+		}
+		else
+		{
+			qindex = _atoi(index);
+			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, ": ", 2);
+			write(STDERR_FILENO, qindex, _strlen(qindex));
+			write(STDERR_FILENO, msg, _strlen(msg));
+			write(STDERR_FILENO, cmd[1], _strlen(cmd[1]));
+			write(STDERR_FILENO, "\n", 1);
+			free(qindex);
+			free_string_array(cmd);
+			(*status) = 2;
+			return;
+		}
+	}
+	free_string_array(cmd);
+	exit(exit_val);
+}
+
+/**
+ * show_env - Outputs the environment variables
+ * @cmd: Command for printing environment variables
+ * @status: Void parameter
+ */
+void show_env(char **cmd, int *status)
+{
+	int i;
+
+	for (i = 0; environ[i]; i++)
+	{
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
+	free_string_array(cmd);
+	(*status) = 0;
+}
+
