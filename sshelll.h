@@ -12,6 +12,8 @@
 #include <fcntl.h>
 
 #define DELIM " \t\n"
+#define INTERACTIVE_MODE 1
+#define NON_INTERACTIVE_MODE 0
 
 extern char **environ;
 
