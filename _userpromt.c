@@ -1,4 +1,4 @@
-#include "sheell.h"
+#include "sshelll.h"
 
 /**
 * _userprompt - Displays a user prompt and captures a command to execute.
@@ -28,6 +28,6 @@ if (executionMode == INTERACTIVE_MODE)
 {
 write(STDOUT_FILENO, "\n", 1);
 }
-return(EOF);
+return (EOF);
 }
-return EXIT_SUCCESS;
+return (EXIT_SUCCESS);
