@@ -1,51 +1,51 @@
-#include "sheell.h"
+#include "sshell.h"
 
 /**
-* tokenizeString - Tokenize a string into an array of tokens
-*
-* @inputStr: The input string to be tokenized,
-* incuding command line arguments if any
-* @delimiter: The delimiter character(s) used for tokenization
-*
-* Return: An array of tokens
-*/
-char **tokenizeString(char *inputStr, char *delimiter)
+ * tokenize - split a string into commands
+ * @line: string to be tokenized
+ *
+ * Return: token
+ */
+char **tokenize(char *line)
 {
-char **tokensArray = NULL;   /* Array to store the tokens */
-int tokenCount = 0;         /* Count of tokens found */
-int tokensFound = 0;        /* Counter for tokens found */
-char *token = NULL;         /* Temporary storage for a token */
-int inputLength = 0;        /* Length of the input string */
+	char *token = NULL, *tmp = NULL;
+	char **cmd = NULL;
+	int cpt = 0, i = 0;
 
-inputLength = getStringLength(inputStr);  /* Cal d length of d input string */
-token = allocateMemory(inputLength);      /* Allocate memory for temp token */
+	if (!line)
+		return (NULL);
+	tmp = _strdup(line);
+	token = strtok(tmp, DELIM);
+	if (token == NULL)
+	{
+		free(line);
+		free(tmp);
+		return (NULL);
+	}
 
-/* Copy the input string to the temporary token */
-copyString(token, inputStr);
+	while (token)
+	{
+		cpt++;
+		token = strtok(NULL, DELIM);
+	}
+	free(tmp);
 
-/* Count the number of tokens in the input string */
-tokenCount = countTokens(token, delimiter);
+	cmd = malloc(sizeof(char *) * (cpt + 1));
+	if (!cmd)
+	{
+		free(line);
+		return (NULL);
+	}
 
-/* Free the temporary token */
-/* Allocate memory for the tokensArray */
-tokensArray = allocateTokenArray(tokenCount);
-
-/* Tokenize the input string */
-token = strtok(inputStr, delimiter);
-while (token != NULL)
-{
-/* Store the token in the tokensArray */
-tokensArray[tokensFound++] = copyString(token, NULL);
-
-/* Get the next token */
-token = strtok(NULL, delimiter);
+	token = strtok(line, DELIM);
+	while (token)
+	{
+		cmd[i] = _strdup(token);
+		token = strtok(NULL, DELIM);
+		i++;
+	}
+	free(line);
+	cmd[i] = NULL;
+	return (cmd);
 }
 
-/* Set the last element of the tokensArray to NULL */
-tokensArray[tokensFound] = NULL;
-
-/* Free the temporary token */
-freeMemory(token);
-
-return (tokensArray);
-}

@@ -1,54 +1,43 @@
-#include "shell.h"
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "sshell.h"
 
 /**
-* execute_command - Execute a command entered by the user.
-* @command: The command to execute.
-*  @argv: array of arguments that follow the command
-* Return: 0 on success, 1 on failure.
-*/
-int execute_command(char *command, char *argv[])
+ * _launch - executes instructions after  parsing
+ * @cmd: instructions to be executed
+ * @argv: array  arguments to follow the instructions
+ * @index: guide for the instructions
+ * Return: return status
+ */
+int _launch(char **cmd, char **argv, int index)
+{
+	char *full_cmd;
+	pid_t child;
+	int status;
 
-{
-if (execve(command, argv, environ) == -1)
-{
-perror("execve");
-exit(1); /* Error */
-}
+	full_cmd = getfullpath(cmd[0]);
+	if (!full_cmd)
+	{
+		_perror(argv[0], cmd[0], index);
+		free_string_array(cmd);
+		return (127);
+	}
 
-return (0); /* Return 0 on success */
-}
-
-/**
-* execute - Execute a command entered by the user.
-* @command: The command to execute.
-* @argv: array of arguments that follow the command
-* Return: 0 on success, 1 on failure.
-*/
-int execute(char *command, char *argv[])
-{
-if (command == NULL || command[0] == '\0')
-return (1); /* Error */
-
-if (fork() == 0)
-{
-/* This code is executed by the child process */
-return (execute_command(command, argv));
-}
-else
-{
-/* This code is executed by the parent process */
-int status;
-if (wait(&status) == -1)
-{
-perror("wait");
-return (1); /* Error */
-}
-return (WEXITSTATUS(status));
-}
+	child = fork();
+	if (child == 0)
+	{
+		if (execve(full_cmd, cmd, environ) == -1)
+		{
+			free(full_cmd);
+			full_cmd = NULL;
+			free_string_array(cmd);
+		}
+	}
+	else
+	{
+		waitpid(child, &status, 0);
+		free_string_array(cmd);
+		free(full_cmd);
+		full_cmd = NULL;
+	}
+	return (WEXITSTATUS(status));
 }
 
