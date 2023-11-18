@@ -1,4 +1,4 @@
-#include "sshell.h"
+#include "sshelll.h"
 
 /**
  * pathbuilt - Constructs a list of built-in commands
@@ -35,9 +35,9 @@ void check_b(char **cmd, char **argv, int *status, int index)
 	(void)index;
 
 	if (_strcmp(cmd[0], "exit") == 0)
-		_quit_shell(cmd, argv, status, index);
+		terminateshell(cmd, argv, status, index);
 	else if (_strcmp(cmd[0], "env") == 0)
-		_display_env(cmd, status);
+		show_env(cmd, status);
 }
 
 /**

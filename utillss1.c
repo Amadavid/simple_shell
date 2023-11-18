@@ -1,17 +1,19 @@
-#include "sshell.h"
+#include "sshelll.h"
 
 /**
- * num_is_pos - Checks if the string represents a positive number
+ * num_is_positive - Checks if the string represents a positive number
  * @str: The string to be checked
  *
  * Return: 1 if the string is a positive number, 0 otherwise
  */
-int num_is_pos(char *str)
+int num_is_positive(char *str)
 {
+	int i;
+
 	if (!str)
 		return (0);
 
-	for (int i = 0; str[i]; i++)
+	for (i = 0; str[i]; i++)
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
@@ -29,8 +31,9 @@ int num_is_pos(char *str)
 int custom_atoi(char *str)
 {
 	int number = 0;
+	int i;
 
-	for (int i = 0; str[i]; i++)
+	for (i = 0; str[i]; i++)
 	{
 		number *= 10;
 		number += (str[i] - '0');
@@ -38,3 +41,4 @@ int custom_atoi(char *str)
 
 	return (number);
 }
+

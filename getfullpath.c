@@ -1,4 +1,4 @@
-#include "sshell.h"
+#include "sshelll.h"
 
 /**
  * getfullpath - obtains the environment path to locate commands
@@ -21,7 +21,7 @@ char *getfullpath(char *cmd)
 		}
 	}
 
-	env_path = getevironpath("PATH");
+	env_path = getenvironpath("PATH");
 	if (!env_path)
 		return (NULL);
 
