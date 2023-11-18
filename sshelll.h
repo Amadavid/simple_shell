@@ -38,7 +38,7 @@ char *getenvironpath(char *var);
 /*getfullpath.c*/
 char *getfullpath(char *cmd);
 
-/*_utils.c*/
+/*_utillss.c*/
 void _perror(char *name, char *cmd, int index);
 char *_atoi(int n);
 void reverse_string(char *str, int len);
@@ -49,6 +49,7 @@ void terminateshell(char **cmd, char **argv, int *status, int index);
 void check_b(char **cmd, char **argv, int *status, int index);
 int pathbuilt(char *cmd);
 
+/*_utillss1.c*/
 int custom_atoi(char *str);
 int num_is_pos(char *str);
 

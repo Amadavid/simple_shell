@@ -6,7 +6,7 @@
  *
  * Return: 1 if the string is a positive number, 0 otherwise
  */
-int num_is_positive(char *str)
+int num_is_pos(char *str)
 {
 	int i;
 
