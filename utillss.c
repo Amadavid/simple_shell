@@ -1,4 +1,4 @@
-#include "sshell.h"
+#include "sshelll.h"
 
 /**
  * free_string_array - Release memory allocated to the token array
@@ -8,10 +8,12 @@
  */
 void free_string_array(char **array)
 {
+	int i;
+
 	if (!array)
 		return;
 
-	for (int i = 0; array[i]; i++)
+	for (i = 0; array[i]; i++)
 	{
 		free(array[i]);
 		array[i] = NULL;
@@ -55,7 +57,7 @@ char *_atoi(int n)
 	int i = 0;
 
 	if (n == 0)
-		buffer[i++] = '\0';
+		buffer[i++] = '0';
 	else
 	{
 		do {
@@ -63,6 +65,7 @@ char *_atoi(int n)
 			n /= 10;
 		} while (n > 0);
 	}
+
 	buffer[i] = '\0';
 	reverse_string(buffer, i);
 
