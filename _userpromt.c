@@ -21,13 +21,13 @@ if (executionMode == INTERACTIVE_MODE)
 {
 write(STDOUT_FILENO, "# ", 2);
 }
-bytesReadResult = getline(buffer, bytesRead, stdin);
+bytesReadResult = getline(commandBuffer, bytesRead, stdin);
 if (bytesReadResult == EOF)
 {
 if (executionMode == INTERACTIVE_MODE)
 {
 write(STDOUT_FILENO, "\n", 1);
 }
-return (EOF);
+return(EOF);
 }
-return (EXIT_SUCCESS);
+return EXIT_SUCCESS;
